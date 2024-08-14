@@ -11,6 +11,7 @@ const ControlPanel = ({ points, setPoints, onStart, isPlaying }) => {
           value={points}
           onChange={(e) => setPoints(parseInt(e.target.value) || 0)}
           disabled={isPlaying}
+          min={0}
         />
       </label>
       <button onClick={onStart}>{isPlaying ? "Restart" : "Play"}</button>
