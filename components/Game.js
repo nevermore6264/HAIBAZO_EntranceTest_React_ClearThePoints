@@ -23,6 +23,16 @@ const Game = () => {
     }));
   };
 
+  const resetGame = () => {
+    setSequence([]);
+    setNextNumber(1);
+    setStatus("");
+    setPositions([]);
+    setIsPlaying(false);
+    clearInterval(timerRef.current);
+    setTime(0);
+  };
+
   const handleStart = () => {
     if (points <= 0) {
       setError("Points must be greater than 0");
@@ -30,25 +40,20 @@ const Game = () => {
     }
     setError("");
 
+    resetGame(); // Reset lại toàn bộ trạng thái trước khi bắt đầu trò chơi mới
+
     const newSequence = Array.from({ length: points }, (_, i) => i + 1);
-    setSequence(newSequence); // Tạo lại sequence mới
-    setPositions(generateRandomPositions(points)); // Tạo lại vị trí ngẫu nhiên mới
-    setNextNumber(1);
-    setStatus("");
+    setSequence(newSequence);
+    setPositions(generateRandomPositions(points));
     setIsPlaying(true);
-    setTime(0);
 
     // Start the timer
-    if (timerRef.current) clearInterval(timerRef.current);
     timerRef.current = setInterval(() => {
-      setTime(() => 0.1);
+      setTime((prevTime) => prevTime + 0.1);
     }, 100);
   };
 
   const handleNumberClick = (number) => {
-    console.log("points", points);
-    console.log("nextNumber", nextNumber);
-
     if (number === nextNumber) {
       setNextNumber(nextNumber + 1);
       if (nextNumber === points) {

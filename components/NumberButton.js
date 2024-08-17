@@ -8,7 +8,7 @@ const NumberButton = ({ number, position, onClick }) => {
     setIsClicked(true);
     setTimeout(() => {
       onClick(number);
-    }, 1000);
+    }, 300);
   };
 
   return (
