@@ -13,7 +13,7 @@ const Game = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [time, setTime] = useState(0);
   const [error, setError] = useState("");
-  const [positions, setPositions] = useState([]); // Lưu vị trí ngẫu nhiên cho mỗi số
+  const [positions, setPositions] = useState([]);
   const timerRef = useRef(null);
 
   const generateRandomPositions = (points) => {
@@ -31,8 +31,8 @@ const Game = () => {
     setError("");
 
     const newSequence = Array.from({ length: points }, (_, i) => i + 1);
-    setSequence(newSequence);
-    setPositions(generateRandomPositions(points)); // Tạo vị trí ngẫu nhiên cho các số
+    setSequence(newSequence); // Tạo lại sequence mới
+    setPositions(generateRandomPositions(points)); // Tạo lại vị trí ngẫu nhiên mới
     setNextNumber(1);
     setStatus("");
     setIsPlaying(true);
@@ -41,11 +41,14 @@ const Game = () => {
     // Start the timer
     if (timerRef.current) clearInterval(timerRef.current);
     timerRef.current = setInterval(() => {
-      setTime((prevTime) => prevTime + 0.1);
+      setTime(() => 0.1);
     }, 100);
   };
 
   const handleNumberClick = (number) => {
+    console.log("points", points);
+    console.log("nextNumber", nextNumber);
+
     if (number === nextNumber) {
       setNextNumber(nextNumber + 1);
       if (nextNumber === points) {
@@ -89,7 +92,7 @@ const Game = () => {
           <NumberButton
             key={number}
             number={number}
-            position={positions[index]} // Truyền vị trí ngẫu nhiên vào NumberButton
+            position={positions[index]}
             onClick={handleNumberClick}
           />
         ))}
