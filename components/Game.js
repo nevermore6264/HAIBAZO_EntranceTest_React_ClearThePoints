@@ -37,6 +37,15 @@ const Game = () => {
 
   return (
     <div className={styles.gameContainer}>
+      {status && (
+        <div
+          className={`${styles.status} ${
+            status === "ALL CLEARED" ? styles.success : styles.fail
+          }`}
+        >
+          {status}
+        </div>
+      )}
       <h2>LET'S PLAY</h2>
       <ControlPanel
         points={points}
@@ -53,15 +62,6 @@ const Game = () => {
           />
         ))}
       </div>
-      {status && (
-        <div
-          className={`${styles.status} ${
-            status === "ALL CLEARED" ? styles.success : styles.fail
-          }`}
-        >
-          {status}
-        </div>
-      )}
     </div>
   );
 };
