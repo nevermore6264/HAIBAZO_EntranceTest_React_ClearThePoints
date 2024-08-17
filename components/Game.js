@@ -42,9 +42,12 @@ const Game = () => {
 
     resetGame(); // Reset lại toàn bộ trạng thái trước khi bắt đầu trò chơi mới
 
-    const newSequence = Array.from({ length: points }, (_, i) => i + 1);
-    setSequence(newSequence);
-    setPositions(generateRandomPositions(points));
+    const newSequence = Array.from({ length: points }, (_, i) => ({
+      number: i + 1,
+      isClicked: false,
+    }));
+    setSequence(newSequence); // Tạo lại sequence mới
+    setPositions(generateRandomPositions(points)); // Tạo lại vị trí ngẫu nhiên mới
     setIsPlaying(true);
 
     // Start the timer
@@ -55,6 +58,11 @@ const Game = () => {
 
   const handleNumberClick = (number) => {
     if (number === nextNumber) {
+      setSequence((prevSequence) =>
+        prevSequence.map((item) =>
+          item.number === number ? { ...item, isClicked: true } : item
+        )
+      );
       setNextNumber(nextNumber + 1);
       if (nextNumber === points) {
         setStatus("ALL CLEARED");
@@ -93,12 +101,13 @@ const Game = () => {
         isPlaying={isPlaying}
       />
       <div className={styles.playArea}>
-        {sequence.map((number, index) => (
+        {sequence.map((item, index) => (
           <NumberButton
-            key={number}
-            number={number}
+            key={item.number}
+            number={item.number}
             position={positions[index]}
             onClick={handleNumberClick}
+            isClicked={item.isClicked}
           />
         ))}
       </div>

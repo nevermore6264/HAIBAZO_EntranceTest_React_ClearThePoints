@@ -1,20 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "../styles/NumberButton.module.css";
 
-const NumberButton = ({ number, position, onClick }) => {
-  const [isClicked, setIsClicked] = useState(false);
-
+const NumberButton = ({ number, position, onClick, isClicked }) => {
   const handleClick = () => {
-    setIsClicked(true);
-    setTimeout(() => {
+    if (!isClicked) {
       onClick(number);
-    }, 300);
+    }
   };
 
   return (
     <button
       className={`${styles.numberButton} ${isClicked ? styles.active : ""}`}
-      style={position} // Sử dụng vị trí truyền vào từ props
+      style={position}
       onClick={handleClick}
       disabled={isClicked}
     >
