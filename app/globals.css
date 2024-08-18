@@ -10,7 +10,11 @@ body {
   overflow-x: hidden;
   min-height: 100vh;
   color: #000000;
-  background: #ffffff;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 0.7) 0%,
+    skyblue 100%
+  );
 }
 
 a {
