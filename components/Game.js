@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import NumberButton from "./NumberButton";
 import ControlPanel from "./ControlPanel";
 import styles from "../styles/Game.module.css";
+import Snowflakes from "./Snowflakes"; // Import Snowflakes component
 
 const Game = () => {
   const [points, setPoints] = useState(0);
@@ -82,6 +83,7 @@ const Game = () => {
 
   return (
     <div className={styles.gameContainer}>
+      <Snowflakes />
       {status && (
         <div
           className={`${styles.status} ${
