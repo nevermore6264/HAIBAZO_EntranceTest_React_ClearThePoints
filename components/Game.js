@@ -93,13 +93,14 @@ const Game = () => {
       )}
       {error && <div className={styles.error}>{error}</div>}
       <h2>LET'S PLAY</h2>
-      <div className={styles.timer}>Time: {time.toFixed(1)} s</div>
       <ControlPanel
         points={points}
         setPoints={setPoints}
         onStart={handleStart}
         isPlaying={isPlaying}
       />
+      <div className={styles.timer}>Time: {time.toFixed(1)} s</div>
+
       <div className={styles.playArea}>
         {sequence.map((item, index) => (
           <NumberButton
